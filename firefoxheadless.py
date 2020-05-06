@@ -2,6 +2,7 @@
 Basic solution to wrap Firefox Headless using Selenium driver
 """
 
+import logging
 import time
 from selenium.webdriver import Firefox
 from selenium.webdriver import FirefoxProfile
@@ -19,6 +20,16 @@ class FirefoxHeadless:
 
     def __init__(self, *args, **kwargs):
         self.driver = FirefoxHeadless.create_driver(*args, **kwargs)
+
+    def __enter__(self):
+        '''Make a new browser instance and return it'''
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        '''The browser is closed at the end'''
+        if exc_type is not None:
+            logging.error('An error ocurred: %r : %r : %r', exc_type, exc_value, traceback)
+        self.close()
 
     def get(self, url, sleep=5, retry=4):
         '''Get a page'''
