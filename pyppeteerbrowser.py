@@ -2,8 +2,6 @@
 Browser
 
 It emulates a browser using Pyppeteer with Chromium
-
-Create a new instances and load sessions/cookies
 """
 
 import logging
@@ -21,7 +19,7 @@ class BrowserError(Exception):
 
 
 class Browser:
-    """Wrap a Pyppeteer instance, able to create one using a saved MatchesFashion session"""
+    """Wrap a Pyppeteer instance"""
 
     def __init__(self, binary: str):
         '''
