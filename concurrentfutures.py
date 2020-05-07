@@ -18,7 +18,7 @@ class NoArticlesFoundError(Exception):
     '''When no articles found'''
 
 
-def crawl_nytimes_first_article(article_no=1):
+def crawl_nytimes_article(article_no=1):
     '''Go to the NY Times homepage and extract the N article body'''
     logging.info('Crawling article No. %d', article_no)
     with FirefoxHeadless() as browser:
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     printer = pprint.PrettyPrinter(indent=2)
     with futures.ThreadPoolExecutor(4) as executor:
-        res = executor.map(crawl_nytimes_first_article, list(range(1, 5)))
+        res = executor.map(crawl_nytimes_article, list(range(1, 5)))
     printer.pprint(list(res))
 
     logging.info('Finished')
